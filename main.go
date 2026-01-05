@@ -16,6 +16,11 @@ func main() {
 	}
 	defer db.Close()
 
+	http.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprintf(w, "Hello World")
+	})
+
 	http.HandleFunc("POST /", func(w http.ResponseWriter, r *http.Request) {
 		body, err := io.ReadAll(r.Body)
 		if err != nil {

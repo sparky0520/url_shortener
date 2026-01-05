@@ -30,7 +30,7 @@ func connectDB() (*sql.DB, error) {
 	createTableQuery := `
 	CREATE TABLE IF NOT EXISTS main(
 		id INT AUTO_INCREMENT PRIMARY KEY,
-		url TEXT NOT NULL UNIQUE,
+		url TEXT NOT NULL,
     	clicks INT DEFAULT 0,
 		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 	)
