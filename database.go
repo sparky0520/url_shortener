@@ -47,7 +47,7 @@ func connectDB() (*sql.DB, error) {
 
 // create record
 func addUrl(url string, db *sql.DB) (int64, error) {
-	result, err := db.Exec("INSERT INTO main (url) VALUES ?", url)
+	result, err := db.Exec("INSERT INTO main (url) VALUES (?)", url)
 	if err != nil {
 		return 0, err
 	}
@@ -64,7 +64,7 @@ func addUrl(url string, db *sql.DB) (int64, error) {
 // fetch record
 func getUrl(id int64, db *sql.DB) (string, error) {
 	var url string
-	err := db.QueryRow("SELECT url FROM main WHERE id = ?", id).Scan(url)
+	err := db.QueryRow("SELECT url FROM main WHERE id = (?)", id).Scan(&url)
 	if err == sql.ErrNoRows {
 		return "", fmt.Errorf("No record with id %d not found", id)
 	}
@@ -73,7 +73,7 @@ func getUrl(id int64, db *sql.DB) (string, error) {
 	}
 
 	// Increment clicks
-	db.Exec("UPDATE main SET clicks = clicks + 1 WHERE id = ?", id)
+	db.Exec("UPDATE main SET clicks = clicks + 1 WHERE id = (?)", id)
 
 	return url, nil
 }
