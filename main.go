@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io"
 	"log"
@@ -74,6 +75,10 @@ func main() {
 		fmt.Fprintf(w, "%s", url)
 	})
 
-	fmt.Println("Server running on http://localhost:8080")
-	http.ListenAndServe(":8080", nil)
+	port := flag.Int("port", 8080, "Port to run the server on")
+	flag.Parse()
+
+	addr := fmt.Sprintf(":%d", *port)
+	fmt.Printf("Server running on http://localhost:%d\n", *port)
+	http.ListenAndServe(addr, nil)
 }
