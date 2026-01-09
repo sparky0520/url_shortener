@@ -20,6 +20,7 @@ func main() {
 	http.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		fmt.Fprintf(w, "Hello World")
+		fmt.Println("Processed request!") // Check
 	})
 
 	http.HandleFunc("POST /", func(w http.ResponseWriter, r *http.Request) {
